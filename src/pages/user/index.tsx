@@ -82,43 +82,51 @@ export default function UserPage() {
 
   return (
     <div className="w-full space-y-8 py-8">
-      <Card>
-        <CardContent className="flex flex-col items-center gap-6 p-6 sm:flex-row">
-          <Avatar className="size-32">
-            <AvatarImage src={user.avatar_url} />
-            <AvatarFallback>
-              {user.login.slice(0, 2).toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
+      <div className="space-y-4">
+        <Button variant="outline" asChild>
+          <Link to={"/"}>Voltar</Link>
+        </Button>
 
-          <div className="w-full space-y-4">
-            <div className="space-y-1">
-              <h1 className="text-2xl font-bold">{user.name ?? user.login}</h1>
+        <Card>
+          <CardContent className="flex flex-col items-center gap-6 p-6 sm:flex-row">
+            <Avatar className="size-32">
+              <AvatarImage src={user.avatar_url} />
+              <AvatarFallback>
+                {user.login.slice(0, 2).toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
 
-              <h3 className="font-semibold text-muted-foreground">
-                {user.login}
-              </h3>
-            </div>
+            <div className="w-full space-y-4">
+              <div className="space-y-1">
+                <h1 className="text-2xl font-bold">
+                  {user.name ?? user.login}
+                </h1>
 
-            <Separator className="bg-border/50" />
+                <h3 className="font-semibold text-muted-foreground">
+                  {user.login}
+                </h3>
+              </div>
 
-            <div className="space-y-2">
-              {user.bio && <p>{user.bio}</p>}
+              <Separator className="bg-border/50" />
 
-              <div className="flex gap-4 text-sm">
-                <div>
-                  <span className="text-muted-foreground">Seguidores:</span>
-                  <span className="font-semibold"> {user.followers}</span>
-                </div>
-                <div>
-                  <span className="text-muted-foreground">Seguindo:</span>
-                  <span className="font-semibold"> {user.following}</span>
+              <div className="space-y-2">
+                {user.bio && <p>{user.bio}</p>}
+
+                <div className="flex gap-4 text-sm">
+                  <div>
+                    <span className="text-muted-foreground">Seguidores:</span>
+                    <span className="font-semibold"> {user.followers}</span>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">Seguindo:</span>
+                    <span className="font-semibold"> {user.following}</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      </div>
 
       <div className="flex justify-end">
         <Select
@@ -162,13 +170,13 @@ export default function UserPage() {
                   <div className="flex items-center justify-between">
                     <h3 className="font-medium">{repo.name}</h3>
 
-                    <div className="flex items-center gap-1 text-sm">
+                    <Badge variant="secondary">
                       <Star
                         size={16}
                         className="text-yellow-600 dark:text-yellow-500"
                       />
                       <span>{repo.stargazers_count}</span>
-                    </div>
+                    </Badge>
                   </div>
 
                   {repo.description && (
@@ -178,7 +186,9 @@ export default function UserPage() {
                   )}
 
                   {repo.language && (
-                    <Badge className="text-xs">{repo.language}</Badge>
+                    <Badge variant={"outline"} className="text-xs">
+                      {repo.language}
+                    </Badge>
                   )}
                 </CardContent>
               </Card>
