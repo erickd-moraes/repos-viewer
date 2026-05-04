@@ -6,14 +6,10 @@ export type RepoSort = "stars" | "name";
 
 function sortRepos(repos: GithubRepo[], sort: RepoSort) {
   if (sort === "stars") {
-    return [...repos].sort(
-      (a, b) => b.stargazers_count - a.stargazers_count
-    );
+    return [...repos].sort((a, b) => b.stargazers_count - a.stargazers_count);
   }
 
-  return [...repos].sort((a, b) =>
-    a.name.localeCompare(b.name)
-  );
+  return [...repos].sort((a, b) => a.name.localeCompare(b.name));
 }
 
 export function useRepos(username: string, sort: RepoSort) {

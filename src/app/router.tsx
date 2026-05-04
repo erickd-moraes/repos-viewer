@@ -1,11 +1,12 @@
-import { createBrowserRouter, Outlet } from "react-router-dom"
+import { createBrowserRouter, Outlet } from "react-router-dom";
 
-import HomePage from "@/pages/home"
-import UserPage from "@/pages/user"
-import RepoPage from "@/pages/repo"
-import NotFoundPage from "@/pages/not-found"
+import HomePage from "@/pages/home";
+import UserPage from "@/pages/user";
+import RepoPage from "@/pages/repo";
+import NotFoundPage from "@/pages/not-found";
 
-import { Header } from "@/components/layout/header"
+import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
 
 export const router = createBrowserRouter([
   {
@@ -17,6 +18,8 @@ export const router = createBrowserRouter([
         <main className="flex flex-1 p-4">
           <Outlet />
         </main>
+
+        <Footer />
       </div>
     ),
     children: [
@@ -38,4 +41,4 @@ export const router = createBrowserRouter([
       },
     ],
   },
-])
+]);
