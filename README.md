@@ -1,21 +1,62 @@
-# React + TypeScript + Vite + shadcn/ui
+# Repos Viewer Challenge
 
-This is a template for a new Vite project with React, TypeScript, and shadcn/ui.
+Aplicação front-end que consome a API do GitHub para buscar usuários e exibir seus repositórios mais populares.
 
-## Adding components
+## Tecnologias utilizadas
 
-To add components to your app, run the following command:
+- React 19
+- Vite
+- React Router DOM
+- TanStack Query
+- Axios
+- TailwindCSS
+- shadcn/ui
+
+## Funcionalidades
+
+- Busca de usuários do GitHub
+- Visualização de perfil (avatar, bio, seguidores)
+- Listagem de repositórios
+- Ordenação por estrelas ou nome
+- Página de detalhes do repositório
+- Histórico de usuários recentemente acessados (localStorage)
+- Tratamento de erros (404, falhas de requisição)
+
+## Pré-requisitos
+
+Antes de começar, você precisa ter instalado:
+
+- Node.js (>= 18)
+- pnpm
+
+## Instalação
+
+Clone o repositório:
 
 ```bash
-npx shadcn@latest add button
+git clone https://github.com/seu-usuario/repos-viewer-challenge.git
 ```
 
-This will place the ui components in the `src/components` directory.
+Acesse a pasta do projeto:
 
-## Using components
+```bash
+cd repos-viewer-challenge
+```
 
-To use the components in your app, import them as follows:
+Instale as dependências:
 
-```tsx
-import { Button } from "@/components/ui/button"
+```bash
+pnpm install
+```
+
+## Rodando o projeto
+
+```bash
+pnpm run dev
+```
+
+A aplicação estará disponível em:
+
+```
+http://localhost:5173
 ```
