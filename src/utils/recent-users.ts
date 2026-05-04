@@ -1,4 +1,4 @@
-type RecentUser = {
+export type RecentUser = {
   login: string;
   avatar_url: string;
   name: string;

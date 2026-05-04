@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 
 import { getRecentUsers } from "@/utils/recent-users";
+
+import { RecentUserCard } from "./components/recent-user-card";
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -62,28 +62,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {recentUsers.map((user) => (
               <Link to={`/users/${user.login}`} key={user.login}>
-                <Card>
-                  <CardContent>
-                    <div className="flex w-full items-center gap-3">
-                      <Avatar size="lg">
-                        <AvatarImage src={user.avatar_url} />
-                        <AvatarFallback>
-                          {user.login.slice(0, 2).toUpperCase()}
-                        </AvatarFallback>
-                      </Avatar>
-
-                      <div className="flex flex-col gap-1">
-                        <p className="w-full overflow-hidden text-sm font-medium text-ellipsis whitespace-nowrap">
-                          {user.name ?? user.login}
-                        </p>
-
-                        <span className="text-xs text-muted-foreground">
-                          @{user.login}
-                        </span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                <RecentUserCard user={user} />
               </Link>
             ))}
           </div>

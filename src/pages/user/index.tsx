@@ -1,14 +1,10 @@
 import { useEffect } from "react";
 import { useParams, Link, useSearchParams } from "react-router-dom";
-import { Star } from "lucide-react";
 
 import { useUser } from "@/features/github/hooks/use-user";
 import { useRepos } from "@/features/github/hooks/use-repos";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import {
   Select,
   SelectContent,
@@ -20,6 +16,9 @@ import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 
 import { addRecentUser } from "@/utils/recent-users";
+
+import { UserInfoCard } from "./components/user-info-card";
+import { UsersRepoCard } from "./components/user-repo-card";
 
 export default function UserPage() {
   const { username } = useParams();
@@ -87,45 +86,7 @@ export default function UserPage() {
           <Link to={"/"}>Voltar</Link>
         </Button>
 
-        <Card>
-          <CardContent className="flex flex-col items-center gap-6 p-6 sm:flex-row">
-            <Avatar className="size-32">
-              <AvatarImage src={user.avatar_url} />
-              <AvatarFallback>
-                {user.login.slice(0, 2).toUpperCase()}
-              </AvatarFallback>
-            </Avatar>
-
-            <div className="w-full space-y-4">
-              <div className="space-y-1">
-                <h1 className="text-2xl font-bold">
-                  {user.name ?? user.login}
-                </h1>
-
-                <h3 className="font-semibold text-muted-foreground">
-                  {user.login}
-                </h3>
-              </div>
-
-              <Separator className="bg-border/50" />
-
-              <div className="space-y-2">
-                {user.bio && <p>{user.bio}</p>}
-
-                <div className="flex gap-4 text-sm">
-                  <div>
-                    <span className="text-muted-foreground">Seguidores:</span>
-                    <span className="font-semibold"> {user.followers}</span>
-                  </div>
-                  <div>
-                    <span className="text-muted-foreground">Seguindo:</span>
-                    <span className="font-semibold"> {user.following}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        <UserInfoCard user={user} />
       </div>
 
       <div className="flex justify-end">
@@ -165,33 +126,7 @@ export default function UserPage() {
         <div className="grid gap-3">
           {repos?.map((repo) => (
             <Link key={repo.id} to={`/users/${user.login}/repos/${repo.name}`}>
-              <Card>
-                <CardContent className="space-y-2 p-4">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-medium">{repo.name}</h3>
-
-                    <Badge variant="secondary">
-                      <Star
-                        size={16}
-                        className="text-yellow-600 dark:text-yellow-500"
-                      />
-                      <span>{repo.stargazers_count}</span>
-                    </Badge>
-                  </div>
-
-                  {repo.description && (
-                    <p className="text-sm text-muted-foreground">
-                      {repo.description}
-                    </p>
-                  )}
-
-                  {repo.language && (
-                    <Badge variant={"outline"} className="text-xs">
-                      {repo.language}
-                    </Badge>
-                  )}
-                </CardContent>
-              </Card>
+              <UsersRepoCard repo={repo} />
             </Link>
           ))}
         </div>
