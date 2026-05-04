@@ -15,7 +15,7 @@ export const router = createBrowserRouter([
       <div className="container mx-auto flex min-h-screen flex-col">
         <Header />
 
-        <main className="flex flex-1 p-4">
+        <main className="mx-auto flex w-full max-w-7xl flex-1 p-4">
           <Outlet />
         </main>
 

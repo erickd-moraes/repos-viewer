@@ -1,10 +1,13 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-import { Input } from "@/components/ui/input";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Separator } from "@/components/ui/separator";
 
-import { getRecentUsers } from "./utils/get-recent-users";
+import { getRecentUsers } from "@/utils/recent-users";
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -23,54 +26,65 @@ export default function HomePage() {
   }
 
   return (
-    <div className="mx-auto mt-20 space-y-6 md:w-xl md:space-y-12">
-      <section className="space-y-3 text-center">
-        <h1 className="text-2xl font-bold md:text-4xl">
-          Explore perfis do GitHub
-        </h1>
+    <div className="mx-auto mt-20 space-y-8 md:w-xl md:space-y-16">
+      <div className="space-y-8">
+        <section className="space-y-3 text-center">
+          <h1 className="text-2xl font-bold md:text-4xl">
+            Explore perfis do GitHub
+          </h1>
 
-        <p className="text-sm text-muted-foreground md:text-base">
-          Busque usuários e descubra seus repositórios mais populares
-        </p>
-      </section>
+          <p className="text-sm text-muted-foreground md:text-base">
+            Busque usuários e descubra seus repositórios mais populares
+          </p>
+        </section>
 
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col items-center gap-2 sm:flex-row"
-      >
-        <Input
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Digite um usuário do GitHub"
-        />
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col items-center gap-2 sm:flex-row"
+        >
+          <Input
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Digite um usuário do GitHub"
+          />
 
-        <Button type="submit" className="w-full sm:w-fit">
-          Buscar
-        </Button>
-      </form>
+          <Button type="submit" className="w-full sm:w-fit">
+            Buscar
+          </Button>
+        </form>
+      </div>
 
       {recentUsers.length > 0 && (
         <section className="space-y-4">
           <h2 className="text-lg font-semibold">Recentemente vistos</h2>
+          <Separator className="bg-border/50" />
 
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {recentUsers.map((user) => (
-              <Button
-                key={user.login}
-                variant={"secondary"}
-                onClick={() => navigate(`/users/${user.login}`)}
-                className="flex flex-col items-center rounded-lg border p-3 transition hover:bg-muted"
-              >
-                <img
-                  src={user.avatar_url}
-                  alt={user.login}
-                  className="h-12 w-12 rounded-full"
-                />
+              <Link to={`/users/${user.login}`} key={user.login}>
+                <Card>
+                  <CardContent>
+                    <div className="flex w-full items-center gap-3">
+                      <Avatar size="lg">
+                        <AvatarImage src={user.avatar_url} />
+                        <AvatarFallback>
+                          {user.login.slice(0, 2).toUpperCase()}
+                        </AvatarFallback>
+                      </Avatar>
 
-                <span className="mt-2 w-full truncate text-center text-sm">
-                  {user.login}
-                </span>
-              </Button>
+                      <div className="flex flex-col gap-1">
+                        <p className="w-full overflow-hidden text-sm font-medium text-ellipsis whitespace-nowrap">
+                          {user.name ?? user.login}
+                        </p>
+
+                        <span className="text-xs text-muted-foreground">
+                          @{user.login}
+                        </span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </section>
