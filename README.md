@@ -1,4 +1,4 @@
-# Repos Viewer Challenge
+# Repos Viewer
 
 Aplicação front-end que consome a API do GitHub para buscar usuários e exibir seus repositórios mais populares.
 
