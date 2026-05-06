@@ -2,6 +2,9 @@
 
 Aplicação front-end que consome a API do GitHub para buscar usuários e exibir seus repositórios mais populares.
 
+## Preview
+https://github.com/user-attachments/assets/3295b460-7dd8-4b03-adc2-754a71d5a13d
+
 ## Tecnologias utilizadas
 
 - React 19
